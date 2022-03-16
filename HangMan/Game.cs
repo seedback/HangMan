@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+using System.Windows;
 
 namespace HangMan
 {
@@ -107,6 +111,7 @@ namespace HangMan
         {
             Word = ChooseWord().ToUpper();
 
+            ShownWord = String.Empty;
             foreach (char c in Word)
             {
                 if (c == ' ')
@@ -169,7 +174,11 @@ namespace HangMan
         // TODO: (Seedback) Add function to replace æøå with \u00E6 \u00F8 \u00E5 
         public static string ChooseWord()
         {
-            var lines = File.ReadAllLines(@"D:\Documents\School\GetAcademy\StartitM3Oppgaver\HangMan\HangMan\words.txt");
+            var path = Directory.GetCurrentDirectory() + "\\words.txt";
+
+            Console.WriteLine(path);
+
+            var lines = File.ReadAllLines(path);
             var r = new Random();
             var randomLineNumber = r.Next(0, lines.Length - 1);
             var line = lines[randomLineNumber];

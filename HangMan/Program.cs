@@ -14,18 +14,19 @@ namespace HangMan
             while (true)
             {
                 Game.Setup();
+                int stage = 0;
 
-                for (int i = 0; Game.PrintStage(i); i++)
+                for (stage = 0; Game.PrintStage(stage); stage++)
                 {
                     Console.OutputEncoding = Encoding.UTF8;
-                    Game.PrintBoard(i);
+                    Game.PrintBoard(stage);
 
                     bool isFinished = false;
                     string input = "";
 
                     while (!isFinished)
                     {
-                        Game.PrintBoard(i);
+                        Game.PrintBoard(stage);
                         input = Console.ReadLine();
                         if (input == String.Empty)
                         {
@@ -37,7 +38,7 @@ namespace HangMan
 
                     if (Game.CheckLetter(input[0]))
                     {
-                        i--;
+                        stage--;
                     }
 
                     if (Game.Word == Game.ShownWord)
@@ -46,7 +47,7 @@ namespace HangMan
                     }
                 }
 
-                Game.PrintBoard(-1);
+                Game.PrintBoard(stage);
                 Console.WriteLine();
 
                 if (Game.Word == Game.ShownWord)
