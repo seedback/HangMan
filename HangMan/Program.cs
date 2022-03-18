@@ -18,7 +18,8 @@ namespace HangMan
 
                 for (stage = 0; Game.PrintStage(stage); stage++)
                 {
-                    Console.OutputEncoding = Encoding.UTF8;
+                    Console.OutputEncoding = Encoding.Latin1;
+                    Console.InputEncoding = Encoding.Latin1;
                     Game.PrintBoard(stage);
 
                     bool isFinished = false;

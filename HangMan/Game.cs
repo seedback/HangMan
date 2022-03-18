@@ -156,7 +156,9 @@ namespace HangMan
         public static bool CheckLetter(char letter)
         {
             bool isIncluded = false;
+
             letter = Convert.ToChar(Convert.ToString(letter).ToUpper());
+
             UsedLetters = UsedLetters.Insert(UsedLetters.Length, Convert.ToString(letter));
             for (int i = 0; i < Word.Length; i++)
             {
@@ -170,18 +172,20 @@ namespace HangMan
             return isIncluded;
         }
 
-
-        // TODO: (Seedback) Add function to replace æøå with \u00E6 \u00F8 \u00E5 
         public static string ChooseWord()
         {
-            var path = Directory.GetCurrentDirectory() + "\\words.txt";
+            string path = Directory.GetCurrentDirectory() + "\\words.txt";
 
-            Console.WriteLine(path);
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("No word.txt file was found at " + path);
+                return "";
+            }
 
-            var lines = File.ReadAllLines(path);
-            var r = new Random();
-            var randomLineNumber = r.Next(0, lines.Length - 1);
-            var line = lines[randomLineNumber];
+            string[] lines = File.ReadAllLines(path, Encoding.Latin1);
+            Random r = new Random();
+            int randomLineNumber = r.Next(0, lines.Length - 1);
+            string line = lines[randomLineNumber];
             return line;
         }
 
